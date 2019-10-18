@@ -106,7 +106,7 @@ for feat in baseFeat:
     baseLayer.updateFeature(feat)
 baseLayer.commitChanges()
 
-# The bivariate class is used to determine the relevant colour value of each record, in this case polygon feature.
+# The bivariate class is used to determine the relevant colour value of each record, in this case a polygon feature.
 #   - To better understand how this bivariate colour ramp works, please see the 'BIVARIATE_COLOUR_RAMP' image file.
 #   - Each polygon is then rendered to its respective colour value.
 
