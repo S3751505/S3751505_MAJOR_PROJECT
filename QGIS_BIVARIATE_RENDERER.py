@@ -1,4 +1,3 @@
-
 #//QGIS BIVARIATE RENDERER OCTOBER 2019 Mitchell Younes RMIT//
 
 # Welcome to my custom QGIS bivariate renderer.
@@ -20,7 +19,7 @@ import numpy as np
 
 # Please set your input data below:
 #   - filepath: Should be the folder where your shapefile is located.
-#   - base: The filename of your shapefile. The file used in this example has been provided under the same name.
+#   - base: The filename of your shapefile.
 #   - output: This will be the name of the choropleth instance which will be added to your display.
 #   - xVar: Your X variable.
 #   - yVar: Your Y variable.
@@ -74,21 +73,21 @@ yPer3 = np.percentile(yField, 75)
 
 baseFeat = baseLayer.getFeatures()
 for feat in baseFeat:
-    if feat[xVar] < xPer1:
+    if feat[xVar] <= xPer1:
         xClass = 1
-    elif xPer1 < feat[xVar] < xPer2:
+    elif xPer1 < feat[xVar] <= xPer2:
         xClass = 2
-    elif xPer2 < feat[xVar] < xPer3:
+    elif xPer2 < feat[xVar] <= xPer3:
         xClass = 3
-    elif xPer3 < feat[xVar]:
+    elif feat[xVar] > xPer3:
         xClass = 4
-    if feat[yVar] < yPer1:
+    if feat[yVar] <= yPer1:
         yClass = 1
-    elif yPer1 < feat[yVar] < yPer2:
+    elif yPer1 < feat[yVar] <= yPer2:
         yClass = 2
-    elif yPer2 < feat[yVar] < yPer3:
+    elif yPer2 < feat[yVar] <= yPer3:
         yClass = 3
-    elif yPer3 < feat[yVar]:
+    elif feat[yVar] > yPer3:
         yClass = 4
     baseLayer.startEditing()
     feat["xClass"] = xClass
@@ -106,7 +105,7 @@ for feat in baseFeat:
     baseLayer.updateFeature(feat)
 baseLayer.commitChanges()
 
-# The bivariate class is used to determine the relevant colour value of each record, in this case a polygon feature.
+# The bivariate class is used to determine the relevant colour value of each record, in this case polygon feature.
 #   - To better understand how this bivariate colour ramp works, please see the 'BIVARIATE_COLOUR_RAMP' image file.
 #   - Each polygon is then rendered to its respective colour value.
 
@@ -141,3 +140,4 @@ for layer in iface.layerTreeView().selectedLayers():
 QgsProject.instance().addMapLayer(renderLayer)
 
 # Thank you for using this bivariate renderer!
+
